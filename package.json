@@ -5,17 +5,37 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.7",
+    "antd": "^4.11.2",
+    "apollo-boost": "^0.4.9",
+    "apollo-link-context": "^1.0.20",
+    "apollo-link-error": "^1.1.13",
+    "apollo-link-http": "^1.5.17",
+    "cookie": "^0.4.1",
+    "isomorphic-unfetch": "^3.1.0",
     "next": "latest",
     "react": "^16.12.0",
+    "react-apollo": "^3.1.5",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.20.0",
+    "@graphql-codegen/typescript": "1.20.0",
+    "@graphql-codegen/typescript-compatibility": "^2.0.1",
+    "@graphql-codegen/typescript-operations": "^1.17.13",
+    "@graphql-codegen/typescript-react-apollo": "2.2.1",
+    "@types/cookie": "^0.4.0",
+    "@types/graphql": "^14.5.0",
+    "@types/next": "^9.0.0",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.1",
     "typescript": "4.0"
   },
   "license": "MIT"
