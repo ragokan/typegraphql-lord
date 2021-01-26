@@ -3,6 +3,109 @@
   background: #fff;
 }
 
+.ant-form-item-control-input {
+  max-width: 300px !important;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.alertObject {
+  max-width: 1200px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.titleHolder {
+  text-align: center;
+  position: relative;
+  padding: 0 0 20px;
+  margin: 0 0 40px;
+}
+
+.titleHolder:after {
+  transform: translateX(-50%);
+  content: "";
+  background: #1890ff;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: 3px;
+  width: 50px;
+}
+
+.titleHolder h2 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.ant-badge-count {
+  background: #1890ff !important;
+  font-size: 100px !important;
+}
+
+.ant-badge-count p {
+  font-size: 13px;
+}
+
+.ant-card-meta-avatar {
+  float: right !important;
+  font-size: 12.5px;
+  font-weight: bold;
+}
+
+.productImage {
+  height: 280px;
+  object-fit: contain;
+}
+
+.popoverListFooter {
+  font-weight: 500;
+}
+
+.ant-popover {
+  width: 250px;
+}
+
+.actionButton {
+  transition: color 0.2s;
+}
+
+.actionButton:hover {
+  color: #1890ff !important;
+}
+
+.mb-2 {
+  margin-bottom: 2px;
+}
+
+.divider {
+  width: 100%;
+  display: block;
+  height: 30px;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.productDetailsIcons {
+  margin-top: 2.5px;
+  font-size: 15px;
+}
+
+.ant-layout-sider {
+  background: white !important;
+}
+
+.grey-text {
+  color: grey;
+}
+
 /* 
 general 
 -------
@@ -183,4 +286,15 @@ p {
 
 .ant-alert-error {
   background-color: #fa32326c !important;
+}
+
+.footer {
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+  z-index: 0;
+}
+
+.mainLayout {
+  min-height: 100vh !important;
 }
