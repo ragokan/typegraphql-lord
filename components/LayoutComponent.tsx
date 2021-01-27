@@ -3,12 +3,14 @@ import Link from "next/link";
 import Head from "next/head";
 import { Layout, Menu } from "antd";
 import { useRouter } from "next/router";
+import GuestLinks from "./GuestLinks";
+import UserLinks from "./UserLinks";
 const { Header, Content, Footer } = Layout;
 
-type Props = {
+interface Props {
   children?: ReactNode;
   title?: string;
-};
+}
 
 const LayoutComponent = ({ children, title }: Props) => {
   const { route } = useRouter();
@@ -28,13 +30,7 @@ const LayoutComponent = ({ children, title }: Props) => {
               <Link href="/">Typegraphql Lord</Link>
             </Menu.Item>
 
-            <Menu.Item key="/auth/login">
-              <Link href="/auth/login">Login</Link>
-            </Menu.Item>
-
-            <Menu.Item key="/auth/register">
-              <Link href="/auth/register">Register</Link>
-            </Menu.Item>
+            {/* {isLogged ? <UserLinks /> : <GuestLinks />} */}
           </Menu>
         </Header>
         <Content style={{ padding: "0 50px" }} className="header-divider">
