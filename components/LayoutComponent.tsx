@@ -3,17 +3,17 @@ import Link from "next/link";
 import Head from "next/head";
 import { Layout, Menu } from "antd";
 import { useRouter } from "next/router";
-import GuestLinks from "./GuestLinks";
-import UserLinks from "./UserLinks";
+import { GuestLinks, UserLinks } from "../utils/Links";
 const { Header, Content, Footer } = Layout;
 
 interface Props {
   children?: ReactNode;
   title?: string;
 }
-
+const ISSERVER = typeof window === "undefined";
 const LayoutComponent = ({ children, title }: Props) => {
   const { route } = useRouter();
+  const isLogged = !ISSERVER ? localStorage.getItem("isLogged") : null;
 
   return (
     <div>
@@ -30,7 +30,17 @@ const LayoutComponent = ({ children, title }: Props) => {
               <Link href="/">Typegraphql Lord</Link>
             </Menu.Item>
 
-            {/* {isLogged ? <UserLinks /> : <GuestLinks />} */}
+            {isLogged
+              ? UserLinks.map((link) => (
+                  <Menu.Item key={link.key} className="menu-item-left-float">
+                    <Link href={link.key}>{link.name}</Link>
+                  </Menu.Item>
+                ))
+              : GuestLinks.map((link) => (
+                  <Menu.Item key={link.key} className="menu-item-left-float">
+                    <Link href={link.key}>{link.name}</Link>
+                  </Menu.Item>
+                ))}
           </Menu>
         </Header>
         <Content style={{ padding: "0 50px" }} className="header-divider">
