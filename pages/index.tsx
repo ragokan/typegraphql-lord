@@ -1,11 +1,21 @@
-import Layout from "../components/Layout";
+import { GetServerSideProps } from "next";
+import React from "react";
+import LayoutComponent from "../components/LayoutComponent";
 
-const IndexPage = () => {
+const Index: React.FC<IndexProps> = (props) => {
   return (
-    <Layout>
-      <h1>Hello World!</h1>
-    </Layout>
+    <LayoutComponent>
+      <h1>Hey</h1>
+    </LayoutComponent>
   );
 };
 
-export default IndexPage;
+interface IndexProps {
+  name: string;
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return { props: {} as IndexProps };
+};
+
+export default Index;

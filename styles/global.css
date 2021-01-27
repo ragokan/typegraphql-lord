@@ -298,3 +298,9 @@ p {
 .mainLayout {
   min-height: 100vh !important;
 }
+
+.alert-5 {
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 30px;
+}

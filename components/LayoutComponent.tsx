@@ -39,7 +39,11 @@ const LayoutComponent = ({ children, title }: Props) => {
         </Header>
         <Content style={{ padding: "0 50px" }} className="header-divider">
           <div className="site-layout-content">
-            <div className="container-fluid">{children}</div>
+            <div className="container-fluid">
+              <div className="block">
+                <div className="container-fluid">{children}</div>
+              </div>
+            </div>
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }} className="footer">
