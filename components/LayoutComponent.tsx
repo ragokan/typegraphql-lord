@@ -1,9 +1,10 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import { Layout, Menu } from "antd";
+import { Button, Layout, Menu } from "antd";
 import { useRouter } from "next/router";
 import { GuestLinks, UserLinks } from "../utils/Links";
+import { useLogoutMutation } from "../generated/apolloComponents";
 const { Header, Content, Footer } = Layout;
 
 interface Props {
@@ -13,7 +14,24 @@ interface Props {
 const ISSERVER = typeof window === "undefined";
 const LayoutComponent = ({ children, title }: Props) => {
   const { route } = useRouter();
-  const isLogged = !ISSERVER ? localStorage.getItem("isLogged") : null;
+  const [useLogout] = useLogoutMutation();
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLogged(!ISSERVER && localStorage.getItem("isLogged") ? true : false);
+  }, [ISSERVER]);
+
+  const useLogoutFunction = async () => {
+    try {
+      const { data } = await useLogout();
+      if (data.logoutUser) {
+        localStorage.removeItem("isLogged");
+        setIsLogged(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -41,6 +59,13 @@ const LayoutComponent = ({ children, title }: Props) => {
                     <Link href={link.key}>{link.name}</Link>
                   </Menu.Item>
                 ))}
+            {isLogged && (
+              <Menu.Item key="/user/logout" className="menu-item-left-float">
+                <Button type="link" onClick={() => useLogoutFunction()}>
+                  Logout
+                </Button>
+              </Menu.Item>
+            )}
           </Menu>
         </Header>
         <Content style={{ padding: "0 50px" }} className="header-divider">
