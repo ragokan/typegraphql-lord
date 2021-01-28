@@ -12,20 +12,24 @@ export const AuthContext = createContext({});
 
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const { data, error, loading } = useGetUserQuery();
+  const { data, error, refetch } = useGetUserQuery();
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    if (!loading) {
-      if (data) {
-        setUser(data.user as any);
-        setIsLogged(true);
-      } else if (error) {
-        setIsLogged(false);
-        setUser(undefined);
-      }
-    }
-  }, [loading]);
+    refetch();
+  }, [isLogged]);
+
+  useEffect(() => {
+    if (!data) return;
+    setUser(data.user as any);
+    setIsLogged(true);
+  }, [data]);
+
+  useEffect(() => {
+    if (!error) return;
+    setUser(undefined);
+    setIsLogged(false);
+  }, [error]);
 
   const value = {
     isLogged,

@@ -16,13 +16,14 @@ interface Props {
 const LayoutComponent = ({ children, title }: Props) => {
   const router = useRouter();
   const [useLogout] = useLogoutMutation();
-  const { isLogged } = useContext(AuthContext) as AuthContextType;
+  const { isLogged, setIsLogged, setUser } = useContext(AuthContext) as AuthContextType;
 
   const useLogoutFunction = async () => {
     try {
       const { data } = await useLogout();
       if (data.logoutUser) {
-        localStorage.removeItem("isLogged");
+        setIsLogged(false);
+        setUser(null);
         router.push("/");
       }
     } catch (error) {

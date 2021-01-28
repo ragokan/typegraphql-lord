@@ -5,6 +5,8 @@ import Link from "next/link";
 import { AlertComponent } from "../../components/AlertComponent";
 import { useRouter } from "next/router";
 import { useLoginMutation } from "../../generated/apolloComponents";
+import { useContext } from "react";
+import { AuthContext, AuthContextType } from "../../context/AuthContext";
 
 interface LoginFormTypes {
   email: string;
@@ -14,12 +16,13 @@ interface LoginFormTypes {
 const LoginPage = () => {
   const [doLogin, { error, data }] = useLoginMutation();
   const router = useRouter();
+  const { setIsLogged } = useContext(AuthContext) as AuthContextType;
 
   const onFinish = async ({ email, password }: LoginFormTypes) => {
     try {
       await doLogin({ variables: { data: { email, password } } });
+      setIsLogged(true);
       router.push("/");
-      localStorage.setItem("isLogged", "E = mc2");
     } catch (error) {
       console.log(error);
     }
