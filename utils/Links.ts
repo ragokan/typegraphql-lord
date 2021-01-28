@@ -3,7 +3,10 @@ interface Link {
   name: string;
 }
 
-export const UserLinks: Link[] = [{ key: "/post/create", name: "Create Post" }];
+export const UserLinks: Link[] = [
+  { key: "/post/create", name: "Create Post" },
+  { key: "/auth/profile", name: "Profile" },
+];
 
 export const GuestLinks: Link[] = [
   { key: "/auth/login", name: "Login" },

@@ -1,32 +1,29 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useContext } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { Button, Layout, Menu } from "antd";
 import { useRouter } from "next/router";
 import { GuestLinks, UserLinks } from "../utils/Links";
 import { useLogoutMutation } from "../generated/apolloComponents";
+import { AuthContext, AuthContextType } from "../context/AuthContext";
 const { Header, Content, Footer } = Layout;
 
 interface Props {
   children?: ReactNode;
   title?: string;
 }
-const ISSERVER = typeof window === "undefined";
-const LayoutComponent = ({ children, title }: Props) => {
-  const { route } = useRouter();
-  const [useLogout] = useLogoutMutation();
-  const [isLogged, setIsLogged] = useState<boolean>(false);
 
-  useEffect(() => {
-    setIsLogged(!ISSERVER && localStorage.getItem("isLogged") ? true : false);
-  }, [ISSERVER]);
+const LayoutComponent = ({ children, title }: Props) => {
+  const router = useRouter();
+  const [useLogout] = useLogoutMutation();
+  const { isLogged } = useContext(AuthContext) as AuthContextType;
 
   const useLogoutFunction = async () => {
     try {
       const { data } = await useLogout();
       if (data.logoutUser) {
         localStorage.removeItem("isLogged");
-        setIsLogged(false);
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
@@ -43,7 +40,7 @@ const LayoutComponent = ({ children, title }: Props) => {
 
       <Layout className="mainLayout">
         <Header>
-          <Menu theme="light" mode="horizontal" defaultSelectedKeys={[route]} className="menu-top">
+          <Menu theme="light" mode="horizontal" defaultSelectedKeys={[router.route]} className="menu-top">
             <Menu.Item key="/" className="menu-item-left-float">
               <Link href="/">Typegraphql Lord</Link>
             </Menu.Item>
